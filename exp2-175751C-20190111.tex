@@ -1,0 +1,143 @@
+\documentclass[a4paper,11pt,titlepage]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{fancybox,ascmac}
+\usepackage{url}
+
+\title{知能情報実験II(第12回):ロジスティックモデル}
+\author{175751C 宮城孝明}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\section{知能情報実験II 第12回 $ \sim $ 第14回の講義の目的}
+本講義の目的は,これまで習ってきた数学をプログラムに置き換えて,それを可視化でき,そこからわかる情報を取集することである.\par
+知能情報工学は,情報を基にモノを作成する分野である.そのために必要となる前提の知識は,数学である.数学は,人工知能や情報セキュリティなど,あらゆる分野にて使われている.\par
+数学という学問は,知能情報工学において重要であり,情報社会を支える根源である.
+
+\section{ロジスティックモデルの時間発展}
+\subsection{時間発展の計算}
+ \begin{table}[htb]
+\caption{個体数の時間発展 : r = 3.43, $ x_0 = 0.7 $}
+\begin{center}
+  \begin{tabular}{|c|l|l|} \hline
+    n & $ x_n $ & $ x_{n+1} $  \\ \hline 
+    0 & 0.700 & $ x_1 = 3.43 \times (1 - 0.700) \times 0.700 = 0.720 $ \\ \hline
+    1 & 0.720 & $ x_2 = 3.43 \times (1 - 0.720) \times 0.720 = 0.691 $ \\ \hline
+    2 & 0.691 & $ x_3 = 3.43 \times (1 - 0.691) \times 0.691 = 0.732 $ \\ \hline
+    3 & 0.732 & $ x_4 = 3.43 \times (1 - 0.732) \times 0.732 = 0.673 $ \\ \hline
+    4 & 0.673 & $ x_5 = 3.43 \times (1 - 0.673) \times 0.673 = 0.755 $ \\ \hline
+    5 & 0.755 & $ x_6 = 3.43 \times (1 - 0.755) \times 0.755 = 0.634 $ \\ \hline
+    6 & 0.634 & $ x_7 = 3.43 \times (1 - 0.634) \times 0.634 = 0.796 $ \\ \hline
+    7 & 0.796 & $ x_8 = 3.43 \times (1 - 0.796) \times 0.796 = 0.557 $ \\ \hline
+    8 & 0.557 & $ x_9 = 3.43 \times (1 - 0.557) \times 0.557 = 0.846 $ \\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
+\clearpage
+
+\subsection{時間発展のr依存性}
+\subsubsection{プログラムのソースコード(python)}
+
+\lstinputlisting[language=python, numbers=left, breaklines=true, basicstyle=\ttfamily\footnotesize,
+  frame=single, caption=python\_code, label=sample]{logistic.py}
+
+
+\subsubsection{プログラムのソースコード(C)}
+\lstinputlisting[language=C, numbers=left, breaklines=true, basicstyle=\ttfamily\footnotesize,
+  frame=single, caption=C\_code, label=2]{logistic.c}
+             
+      
+      
+\clearpage
+\subsubsection{結果と考察}
+\begin{figure}[htpb]
+  \centering
+    \begin{tabular}{c}
+    
+    \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text1.png}
+                          \caption{r = 1.50 のグラフ．}
+                          \label{fig:sin1_x}
+      \end{minipage}
+      
+      \begin{minipage}{0.06\hsize}
+        \hspace{5mm}
+      \end{minipage}
+      
+      \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text2.png}
+                          \caption{r = 2.60 のグラフ．}
+                          \label{fig:sin2_x}
+      \end{minipage}
+      
+      \begin{minipage}{0.06\hsize}
+        \vspace{50mm}
+      \end{minipage} \\
+      
+      \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text3.png}
+                          \caption{r = 3.20 のグラフ．}
+                          \label{fig:sin3_x}
+      \end{minipage}
+      
+      \begin{minipage}{0.06\hsize}
+        \hspace{5mm}
+      \end{minipage}
+      
+      \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text4.png}
+                          \caption{r = 3.50 のグラフ．}
+                          \label{fig:sin4_x}
+      \end{minipage}
+    
+    \begin{minipage}{0.06\hsize}
+        \vspace{50mm}
+      \end{minipage} \\
+
+	  \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text5.png}
+                          \caption{r = 3.86 のグラフ．}
+                          \label{fig:sin5_x}
+      \end{minipage}
+
+	\begin{minipage}{0.06\hsize}
+        \hspace{5mm}
+      \end{minipage}
+      
+      \begin{minipage}{0.47\hsize}
+        \centering
+          \includegraphics[keepaspectratio, scale=0.35, angle=0]
+                          {gnu_text6.png}
+                          \caption{r = 3.90 のグラフ．}
+                          \label{fig:sin6_x}
+      \end{minipage}
+    
+        
+    
+    \end{tabular}
+\end{figure}
+
+\clearpage
+この結果を見てわかることは,ロジスティック方程式が安定した形になるためには,最大増加率rに依存すると考えられる.r = 1.50と r = 2.60は,一定の値に収束している. r = 3.86 と r = 3.90は,形こそ収束していないが安定している形になっていない.大きかったり小さかったりしている.安定した形になっていないため最大増加率が大きければ良いと訳ではない.r = 3.20 と　r = 3.50のときは,形や大きさともに安定しているため,最大増加率には決まった数値を選べば,誤差なく綺麗な結果を得られると考えられる.\par
+
+\section{参考文献}
+\begin{thebibliography}{99}
+	\bibitem{知能情報実験} 知能情報実験II : ロジスティックモデル; 國田樹(琉球大学工学部知能情報コース) 2019年1月
+ \end{thebibliography}
+
+
